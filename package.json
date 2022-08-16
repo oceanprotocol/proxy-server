@@ -21,6 +21,8 @@
     "test": "npm run test:format && npm run test:integration"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "next": "^12.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
