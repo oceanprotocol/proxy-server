@@ -1,1 +1,1 @@
-# proxy-server
+# Proxy API for ENS requests
