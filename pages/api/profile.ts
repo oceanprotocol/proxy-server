@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import { getEnsName } from './name'
 import { getEnsTextRecords } from './text'
 
@@ -21,7 +22,7 @@ function getEnsAvatar(ensName: string): string {
 }
 
 export async function getEnsProfile(accountId: string): Promise<Profile> {
-  const name = await getEnsName(accountId)
+  const name = (await getEnsName(accountId)).name
   if (!name) return { name: null }
 
   const records = await getEnsTextRecords(name)
@@ -52,6 +53,21 @@ export async function getEnsProfile(accountId: string): Promise<Profile> {
     ...(description && { description }),
     ...(links.length > 0 && { links })
   }
-
   return profile
+}
+
+export default async function EnsProfileApi(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  try {
+    const accountId = String(request.query.address)
+    const profile = await getEnsProfile(accountId)
+    console.log('profile', profile)
+
+    response.setHeader('Cache-Control', 's-maxage=86400')
+    response.status(200).send(profile)
+  } catch (error) {
+    response.status(500).send(`${error}`)
+  }
 }

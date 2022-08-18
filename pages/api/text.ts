@@ -29,7 +29,7 @@ export async function getEnsTextRecords(
       requestPolicy: 'cache-and-network'
     }
   )
-  if (!result?.data?.domains[0]?.resolver) return
+  if (!result?.data?.domains[0]?.resolver) throw 'No ENS text records found'
 
   // 2. Retrieve the text records.
   const { texts } = result.data.domains[0].resolver
@@ -40,7 +40,6 @@ export async function getEnsTextRecords(
   for (let index = 0; index < texts?.length; index++) {
     const key = texts[index]
     const value = await ens.name(ensName).getText(key)
-    console.log(value)
     records.push({ key, value })
   }
 
