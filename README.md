@@ -1,4 +1,4 @@
-# ENS API
+# Proxy API for ENS requests
 
 ## Running Locally
 
@@ -93,3 +93,4 @@ Example response:
     ]
 }
 ```
+
