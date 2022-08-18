@@ -7,7 +7,6 @@
   "main": "./dist/app.js",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
     "prepare": "husky install",
     "build": "npm run clean && tsc --sourcemap",
     "build:docker": "npm run build && docker build . -t ocean/subgraph-fetch-price",
@@ -21,8 +20,11 @@
     "test": "npm run test:format && npm run test:integration"
   },
   "dependencies": {
+    "@ensdomains/ensjs": "^2.1.0",
+    "@oceanprotocol/lib": "^1.1.8",
     "cors": "^2.8.5",
-    "next": "^12.2.5"
+    "next": "^12.2.5",
+    "web3": "^1.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
@@ -31,6 +33,7 @@
     "@types/express": "^4.17.11",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
+    "@types/react": "^18.0.17",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.29.0",
     "chai": "^4.3.6",
