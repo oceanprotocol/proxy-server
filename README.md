@@ -64,3 +64,32 @@ Example response:
     }
 ]
 ```
+
+### Get ENS Profile
+
+```
+GET http://localhost:3000/api/profile?address=0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0
+```
+
+Example response:
+
+```
+{
+    "name": "jellymcjellyfish.eth",
+    "avatar": "https://metadata.ens.domains/mainnet/avatar/jellymcjellyfish.eth",
+    "links": [
+        {
+            "key": "url",
+            "value": "https://oceanprotocol.com"
+        },
+        {
+            "key": "com.github",
+            "value": "oceanprotocol"
+        },
+        {
+            "key": "com.twitter",
+            "value": "oceanprotocol"
+        }
+    ]
+}
+```

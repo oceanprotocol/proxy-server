@@ -7,10 +7,9 @@ export default async function getEnsAddress(
 ) {
   try {
     const ensName = request.query.name
-    console.log('ensName', ensName)
     const ens = await getEns()
     const address = await ens.name(ensName).getAddress()
-    console.log('address', address)
+    if (!address) throw `No address found for "${ensName}"`
 
     response.setHeader('Cache-Control', 's-maxage=86400')
     response.status(200).send(address)
