@@ -1,20 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import ENS, { getEnsAddress as getEnsAddressVendor } from '@ensdomains/ensjs'
-import { getDummyWeb3 } from './_utils'
-
-let ens: any
-
-async function getEns(): Promise<any> {
-  const _ens =
-    ens ||
-    new ENS({
-      provider: (await getDummyWeb3(1)).currentProvider,
-      ensAddress: getEnsAddressVendor(1)
-    })
-  ens = _ens
-
-  return _ens
-}
+import { getEns } from './_utils'
 
 export default async function getEnsName(
   request: NextApiRequest,
@@ -33,6 +18,6 @@ export default async function getEnsName(
     response.setHeader('Cache-Control', 's-maxage=86400')
     response.status(200).send(name)
   } catch (error) {
-    response.send(`${error}`)
+    response.status(500).send(`${error}`)
   }
 }
