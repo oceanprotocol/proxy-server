@@ -54,7 +54,7 @@ export default async function ensTextApi(
     const ensName = String(request.query.name)
     const records = await getEnsTextRecords(ensName)
 
-    response.setHeader('Cache-Control', 's-maxage=86400')
+    response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
     response.status(200).send(records)
   } catch (error) {
     response.status(500).send(`${error}`)

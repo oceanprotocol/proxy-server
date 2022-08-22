@@ -64,7 +64,7 @@ export default async function EnsProfileApi(
     const accountId = String(request.query.address)
     const profile = await getEnsProfile(accountId)
 
-    response.setHeader('Cache-Control', 's-maxage=86400')
+    response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
     response.status(200).send(profile)
   } catch (error) {
     response.status(500).send(`${error}`)

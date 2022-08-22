@@ -11,7 +11,7 @@ export default async function getEnsAddress(
     const address = await ens.name(ensName).getAddress()
     if (!address) throw `No address found for "${ensName}"`
 
-    response.setHeader('Cache-Control', 's-maxage=86400')
+    response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
     response.status(200).send(address)
   } catch (error) {
     response.status(500).send(`${error}`)
