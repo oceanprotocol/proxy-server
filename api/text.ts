@@ -6,6 +6,7 @@ export async function getEnsTextRecords(
 ): Promise<{ key: string; value: string }[]> {
   const texts = [
     'url',
+    'avatar',
     'com.twitter',
     'com.github',
     'org.telegram',

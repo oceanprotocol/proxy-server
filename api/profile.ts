@@ -18,7 +18,7 @@ interface Profile {
 function getEnsAvatar(ensName: string): string {
   return ensName
     ? `https://metadata.ens.domains/mainnet/avatar/${ensName}`
-    : null
+    : 'null'
 }
 
 export async function getEnsProfile(accountId: string): Promise<Profile> {
@@ -46,6 +46,7 @@ export async function getEnsProfile(accountId: string): Promise<Profile> {
   const links: ProfileLink[] = records.filter((record) =>
     linkKeys.includes(record.key)
   )
+  console.log('getEnsAvatar(name)', getEnsAvatar(name))
 
   const profile: Profile = {
     name,

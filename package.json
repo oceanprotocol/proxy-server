@@ -9,9 +9,7 @@
     "clean": "rm -rf ./dist",
     "format": "prettier --ignore-path .gitignore './**/*.{css,yml,js,ts,tsx,json}' --write",
     "test:format": "npm run format && npm run lint",
-    "type-check": "tsc --noEmit",
-    "test:integration": "mocha --config=test/.mocharc.json --node-env=test --exit 'test/**/*.test.ts'",
-    "test": "npm run test:format && npm run test:integration"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "ethers": "^5.7.0"
