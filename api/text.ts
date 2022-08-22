@@ -1,39 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { gql, OperationResult } from 'urql'
-import { fetchData, getProvider } from './_utils'
-
-const ProfileTextRecordsQuery = gql<{
-  domains: [{ resolver: { texts: string[] } }]
-}>`
-  query ProfileTextRecords($name: String!) {
-    domains(where: { name: $name }) {
-      resolver {
-        texts
-      }
-    }
-  }
-`
+import { getProvider } from './_utils'
 
 export async function getEnsTextRecords(
   ensName: string
 ): Promise<{ key: string; value: string }[]> {
-  // 1. Check which text records are set for the domain with ENS subgraph,
-  // to prevent unnecessary contract calls.
-  const result: OperationResult<{
-    domains: [{ resolver: { texts: string[] } }]
-  }> = await fetchData(
-    ProfileTextRecordsQuery,
-    { name: ensName },
-    {
-      url: `https://api.thegraph.com/subgraphs/name/ensdomains/ens`,
-      requestPolicy: 'cache-and-network'
-    }
-  )
-  console.log('result?.data?.domains[0]?.resolver', result)
-  if (!result?.data?.domains[0]?.resolver) throw 'No ENS text records found'
-
-  // 2. Retrieve the text records.
-  const { texts } = result.data.domains[0].resolver
+  const texts = [
+    'url',
+    'com.twitter',
+    'com.github',
+    'org.telegram',
+    'com.discord',
+    'com.reddit'
+  ]
 
   const records = []
   const provider = await getProvider()
@@ -42,7 +20,7 @@ export async function getEnsTextRecords(
   for (let index = 0; index < texts?.length; index++) {
     const key = texts[index]
     const value = await resolver.getText(key)
-    records.push({ key, value })
+    value && records.push({ key, value })
   }
 
   return records

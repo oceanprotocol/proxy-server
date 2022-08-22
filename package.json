@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "author": "Ocean Protocol <devops@oceanprotocol.com>",
   "license": "Apache-2.0",
-  "main": "./dist/app.js",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ext .js --ext .ts --ext .tsx . && npm run type-check",
     "clean": "rm -rf ./dist",
@@ -15,8 +14,7 @@
     "test": "npm run test:format && npm run test:integration"
   },
   "dependencies": {
-    "ethers": "^5.7.0",
-    "urql": "^2.2.3"
+    "ethers": "^5.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
