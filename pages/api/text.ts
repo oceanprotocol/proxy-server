@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { gql, OperationResult } from 'urql'
-import { fetchData, getEns } from './_utils'
+import { fetchData, getProvider } from './_utils'
 
 const ProfileTextRecordsQuery = gql<{
   domains: [{ resolver: { texts: string[] } }]
@@ -35,11 +35,12 @@ export async function getEnsTextRecords(
   const { texts } = result.data.domains[0].resolver
 
   const records = []
-  const ens = await getEns()
+  const provider = await getProvider()
+  const resolver = await provider.getResolver(ensName)
 
   for (let index = 0; index < texts?.length; index++) {
     const key = texts[index]
-    const value = await ens.name(ensName).getText(key)
+    const value = await resolver.getText(key)
     records.push({ key, value })
   }
 

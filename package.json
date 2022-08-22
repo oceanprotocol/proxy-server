@@ -15,11 +15,10 @@
     "test": "npm run test:format && npm run test:integration"
   },
   "dependencies": {
-    "@ensdomains/ensjs": "^2.1.0",
     "@oceanprotocol/lib": "^1.1.8",
+    "ethers": "^5.7.0",
     "next": "^12.2.5",
-    "urql": "^2.2.3",
-    "web3": "^1.7.5"
+    "urql": "^2.2.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

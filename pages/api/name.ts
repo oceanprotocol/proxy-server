@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getEns } from './_utils'
+import { getProvider } from './_utils'
 
 export async function getEnsName(accountId: string) {
-  const ens = await getEns()
-  let name = await ens.getName(accountId)
+  const provider = await getProvider()
+  let name = await provider.lookupAddress(accountId)
 
   // Check to be sure the reverse record is correct.
-  const reverseAccountId = await ens.name(name.name).getAddress()
+  const reverseAccountId = await provider.resolveName(name)
   if (accountId.toLowerCase() !== reverseAccountId.toLowerCase()) name = null
   return name
 }
@@ -18,6 +18,7 @@ export default async function nameApi(
   try {
     const accountId = String(request.query.accountId)
     const name = await getEnsName(accountId)
+
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
     response.status(200).send(name)
   } catch (error) {

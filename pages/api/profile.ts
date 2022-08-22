@@ -22,8 +22,8 @@ function getEnsAvatar(ensName: string): string {
 }
 
 export async function getEnsProfile(accountId: string): Promise<Profile> {
-  const name = (await getEnsName(accountId)).name
-  if (!name) return { name: null }
+  const name = await getEnsName(accountId)
+  if (!name) return { name: 'null' }
 
   const records = await getEnsTextRecords(name)
   if (!records) return { name }

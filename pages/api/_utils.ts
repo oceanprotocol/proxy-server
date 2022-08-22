@@ -1,6 +1,5 @@
 import { ConfigHelper, Config, LoggerInstance } from '@oceanprotocol/lib'
-import Web3 from 'web3'
-import ENS, { getEnsAddress as getEnsAddressVendor } from '@ensdomains/ensjs'
+import { ethers } from 'ethers'
 import {
   createClient,
   dedupExchange,
@@ -9,14 +8,12 @@ import {
   fetchExchange
 } from 'urql'
 
-let ens: any
-
-async function getWeb3(): Promise<Web3> {
-  const config = new ConfigHelper().getConfig(
-    1,
+export async function getProvider(): Promise<any> {
+  const provider = new ethers.providers.InfuraProvider(
+    'homestead',
     process.env.INFURA_PROJECT_ID
-  ) as Config
-  return new Web3(config.nodeUri)
+  )
+  return provider
 }
 
 async function createUrqlClient() {
@@ -29,18 +26,6 @@ async function createUrqlClient() {
     exchanges: [dedupExchange, fetchExchange]
   })
   return client
-}
-
-export async function getEns(): Promise<any> {
-  const _ens =
-    ens ||
-    new ENS({
-      provider: (await getWeb3()).currentProvider,
-      ensAddress: getEnsAddressVendor(1)
-    })
-  ens = _ens
-
-  return _ens
 }
 
 export async function fetchData(
