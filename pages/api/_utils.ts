@@ -11,29 +11,19 @@ import {
 
 let ens: any
 
-function getOceanConfig(network: string | number): Config {
+async function getWeb3(): Promise<Web3> {
   const config = new ConfigHelper().getConfig(
-    network,
-    network === 'polygon' ||
-      network === 'moonbeamalpha' ||
-      network === 1287 ||
-      network === 'bsc' ||
-      network === 56 ||
-      network === 'gaiaxtestnet' ||
-      network === 2021000
-      ? undefined
-      : process.env.INFURA_PROJECT_ID
+    1,
+    process.env.INFURA_PROJECT_ID
   ) as Config
-  return config as Config
-}
-
-async function getDummyWeb3(chainId: number): Promise<Web3> {
-  const config = getOceanConfig(chainId)
   return new Web3(config.nodeUri)
 }
 
 async function createUrqlClient() {
-  const config = getOceanConfig(1)
+  const config = new ConfigHelper().getConfig(
+    1,
+    process.env.INFURA_PROJECT_ID
+  ) as Config
   const client = createClient({
     url: `${config.subgraphUri}/subgraphs/name/oceanprotocol/ocean-subgraph`,
     exchanges: [dedupExchange, fetchExchange]
@@ -45,7 +35,7 @@ export async function getEns(): Promise<any> {
   const _ens =
     ens ||
     new ENS({
-      provider: (await getDummyWeb3(1)).currentProvider,
+      provider: (await getWeb3()).currentProvider,
       ensAddress: getEnsAddressVendor(1)
     })
   ens = _ens
