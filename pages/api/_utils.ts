@@ -8,7 +8,6 @@ import {
   OperationContext,
   fetchExchange
 } from 'urql'
-import { refocusExchange } from '@urql/exchange-refocus'
 
 let ens: any
 
@@ -37,7 +36,7 @@ async function createUrqlClient() {
   const config = getOceanConfig(1)
   const client = createClient({
     url: `${config.subgraphUri}/subgraphs/name/oceanprotocol/ocean-subgraph`,
-    exchanges: [dedupExchange, refocusExchange(), fetchExchange]
+    exchanges: [dedupExchange, fetchExchange]
   })
   return client
 }

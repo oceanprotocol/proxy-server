@@ -17,7 +17,6 @@
   "dependencies": {
     "@ensdomains/ensjs": "^2.1.0",
     "@oceanprotocol/lib": "^1.1.8",
-    "@urql/exchange-refocus": "^0.2.5",
     "next": "^12.2.5",
     "urql": "^2.2.3",
     "web3": "^1.7.5"
