@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { getProvider } from './_utils'
 
 export async function getEnsName(accountId: string) {
@@ -12,8 +12,8 @@ export async function getEnsName(accountId: string) {
 }
 
 export default async function nameApi(
-  request: NextApiRequest,
-  response: NextApiResponse
+  request: VercelRequest,
+  response: VercelResponse
 ) {
   try {
     const accountId = String(request.query.accountId)

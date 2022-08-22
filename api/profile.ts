@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { getEnsName } from './name'
 import { getEnsTextRecords } from './text'
 
@@ -57,8 +57,8 @@ export async function getEnsProfile(accountId: string): Promise<Profile> {
 }
 
 export default async function EnsProfileApi(
-  request: NextApiRequest,
-  response: NextApiResponse
+  request: VercelRequest,
+  response: VercelResponse
 ) {
   try {
     const accountId = String(request.query.address)

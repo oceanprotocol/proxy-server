@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { gql, OperationResult } from 'urql'
 import { fetchData, getProvider } from './_utils'
 
@@ -29,6 +29,7 @@ export async function getEnsTextRecords(
       requestPolicy: 'cache-and-network'
     }
   )
+  console.log('result?.data?.domains[0]?.resolver', result)
   if (!result?.data?.domains[0]?.resolver) throw 'No ENS text records found'
 
   // 2. Retrieve the text records.
@@ -48,8 +49,8 @@ export async function getEnsTextRecords(
 }
 
 export default async function ensTextApi(
-  request: NextApiRequest,
-  response: NextApiResponse
+  request: VercelRequest,
+  response: VercelResponse
 ) {
   try {
     const ensName = String(request.query.name)
