@@ -13,27 +13,27 @@ vercel dev
 ### Get Ens Name
 
 ```
-GET http://localhost:3000/api/name?accountId=0x903322c7e45a60d7c8c3ea236c5bea9af86310c7
+GET http://localhost:3000/api/name?accountId=0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0
 ```
 
 Example response:
 
 ```
 {
-    "name": "winstonwolfe.eth"
+    "name": "jellymcjellyfish.eth"
 }
 ```
 
 ### Get Ens Address
 
 ```
-GET http://localhost:3000/api/address?name=winstonwolfe.eth
+GET http://localhost:3000/api/address?name=jellymcjellyfish.eth
 ```
 
 Example response:
 
 ```
-0x903322C7E45A60d7c8C3EA236c5beA9Af86310c7
+0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0
 ```
 
 ### Get Ens Text Records
@@ -93,4 +93,3 @@ Example response:
     ]
 }
 ```
-
