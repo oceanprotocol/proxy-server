@@ -3,7 +3,7 @@ import { getProvider } from './_utils'
 
 export async function getEnsTextRecords(
   ensName: string
-): Promise<{ key: string; value: string }[]> {
+): Promise<{ key: string; value: string }[] | null> {
   const texts = [
     'url',
     'avatar',
@@ -17,7 +17,7 @@ export async function getEnsTextRecords(
   const records = []
   const provider = await getProvider()
   const resolver = await provider.getResolver(ensName)
-  if (!resolver) throw `No text records found for ${ensName}`
+  if (!resolver) return null
 
   for (let index = 0; index < texts?.length; index++) {
     const key = texts[index]
