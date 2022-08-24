@@ -17,6 +17,7 @@ export async function getEnsTextRecords(
   const records = []
   const provider = await getProvider()
   const resolver = await provider.getResolver(ensName)
+  if (!resolver) throw `No text records found for ${ensName}`
 
   for (let index = 0; index < texts?.length; index++) {
     const key = texts[index]
@@ -36,8 +37,8 @@ export default async function ensTextApi(
     const records = await getEnsTextRecords(ensName)
 
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
-    response.status(200).send(records)
+    response.status(200).send({ records })
   } catch (error) {
-    response.status(500).send(`${error}`)
+    response.send({ error })
   }
 }

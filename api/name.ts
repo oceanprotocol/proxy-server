@@ -20,8 +20,8 @@ export default async function nameApi(
     const name = await getEnsName(accountId)
 
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
-    response.status(200).send(name)
+    response.status(200).send({ name })
   } catch (error) {
-    response.status(500).send(`${error}`)
+    response.send({ error })
   }
 }

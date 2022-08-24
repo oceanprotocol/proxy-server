@@ -9,11 +9,11 @@ export default async function getEnsAddress(
     const ensName = request.query.name
     const provider = await getProvider()
     const address = await provider.resolveName(ensName)
-    if (!address) throw `No address found for "${ensName}"`
+    if (!address) throw `No address found for ${ensName}`
 
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
-    response.status(200).send(address)
+    response.status(200).send({ address })
   } catch (error) {
-    response.status(500).send(`${error}`)
+    response.send({ error })
   }
 }

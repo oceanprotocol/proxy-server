@@ -46,7 +46,6 @@ export async function getEnsProfile(accountId: string): Promise<Profile> {
   const links: ProfileLink[] = records.filter((record) =>
     linkKeys.includes(record.key)
   )
-  console.log('getEnsAvatar(name)', getEnsAvatar(name))
 
   const profile: Profile = {
     name,
@@ -66,8 +65,8 @@ export default async function EnsProfileApi(
     const profile = await getEnsProfile(accountId)
 
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
-    response.status(200).send(profile)
+    response.status(200).send({ profile })
   } catch (error) {
-    response.status(500).send(`${error}`)
+    response.send({ error })
   }
 }
