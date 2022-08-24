@@ -33,7 +33,9 @@ GET http://localhost:3000/api/address?name=jellymcjellyfish.eth
 Example response:
 
 ```
-0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0
+{
+    "address": "0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0"
+}
 ```
 
 ### Get Ens Text Records
@@ -45,24 +47,26 @@ GET http://localhost:3000/api/text?name=jellymcjellyfish.eth
 Example response:
 
 ```
-[
-    {
-        "key": "url",
-        "value": "https://oceanprotocol.com"
-    },
-    {
-        "key": "avatar",
-        "value": "https://raw.githubusercontent.com/oceanprotocol/art/main/logo/favicon-white.png"
-    },
-    {
-        "key": "com.github",
-        "value": "oceanprotocol"
-    },
-    {
-        "key": "com.twitter",
-        "value": "oceanprotocol"
-    }
-]
+{
+    "records": [
+        {
+            "key": "url",
+            "value": "https://oceanprotocol.com"
+        },
+        {
+            "key": "avatar",
+            "value": "https://raw.githubusercontent.com/oceanprotocol/art/main/logo/favicon-white.png"
+        },
+        {
+            "key": "com.twitter",
+            "value": "oceanprotocol"
+        },
+        {
+            "key": "com.github",
+            "value": "oceanprotocol"
+        }
+    ]
+}
 ```
 
 ### Get ENS Profile
@@ -75,21 +79,23 @@ Example response:
 
 ```
 {
-    "name": "jellymcjellyfish.eth",
-    "avatar": "https://metadata.ens.domains/mainnet/avatar/jellymcjellyfish.eth",
-    "links": [
-        {
-            "key": "url",
-            "value": "https://oceanprotocol.com"
-        },
-        {
-            "key": "com.github",
-            "value": "oceanprotocol"
-        },
-        {
-            "key": "com.twitter",
-            "value": "oceanprotocol"
-        }
-    ]
+    "profile": {
+        "name": "jellymcjellyfish.eth",
+        "avatar": "https://metadata.ens.domains/mainnet/avatar/jellymcjellyfish.eth",
+        "links": [
+            {
+                "key": "url",
+                "value": "https://oceanprotocol.com"
+            },
+            {
+                "key": "com.twitter",
+                "value": "oceanprotocol"
+            },
+            {
+                "key": "com.github",
+                "value": "oceanprotocol"
+            }
+        ]
+    }
 }
 ```
