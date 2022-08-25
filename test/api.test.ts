@@ -14,6 +14,7 @@ let server
 let url: string
 const name = 'jellymcjellyfish.eth'
 const accountId = '0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0'
+const invalid = 'lkdfjslkdfjpeoijf3423'
 
 describe('Testing ENS proxy API endpoints', function () {
   this.timeout(25000)
@@ -26,6 +27,7 @@ describe('Testing ENS proxy API endpoints', function () {
         name
       }
     })
+    assert(response.status === 200)
     assert(response.data.address === accountId)
   })
   it('Requesting ENS name should return the expected response', async () => {
@@ -36,6 +38,7 @@ describe('Testing ENS proxy API endpoints', function () {
         accountId
       }
     })
+    assert(response.status === 200)
     assert(response.data.name === name)
   })
   it('Requesting text records should return the expected response', async () => {
@@ -46,12 +49,11 @@ describe('Testing ENS proxy API endpoints', function () {
         name
       }
     })
-
+    assert(response.status === 200)
     assert(
       response.data.records[0].value === 'https://oceanprotocol.com',
       'Wrong URL'
     )
-
     assert(
       response.data.records[1].value ===
         'https://raw.githubusercontent.com/oceanprotocol/art/main/logo/favicon-white.png',
@@ -75,6 +77,7 @@ describe('Testing ENS proxy API endpoints', function () {
       }
     })
 
+    assert(response.status === 200)
     assert(response.data.profile.name === name)
     assert(
       response.data.profile.avatar ===
@@ -87,6 +90,51 @@ describe('Testing ENS proxy API endpoints', function () {
     assert(response.data.profile.links[0].key === 'url')
     assert(response.data.profile.links[1].key === 'com.twitter')
     assert(response.data.profile.links[2].key === 'com.github')
+  })
+
+  // Tests with incorrect address
+
+  it('Requesting address should return status 200 with invalid name', async () => {
+    server = createServer(addressApi)
+    url = await listen(server)
+    const response = await axios.get(url, {
+      params: {
+        name: invalid
+      }
+    })
+    assert(response.status === 200)
+  })
+  it('Requesting name should return status 200 with invalid accountId', async () => {
+    server = createServer(nameApi)
+    url = await listen(server)
+    const response = await axios.get(url, {
+      params: {
+        accountId: invalid
+      }
+    })
+    assert(response.status === 200)
+  })
+  it('Requesting text records should return status 200 with invalid name', async () => {
+    server = createServer(textApi)
+    url = await listen(server)
+    const response = await axios.get(url, {
+      params: {
+        name: invalid
+      }
+    })
+    assert(response.status === 200)
+  })
+
+  it('Requesting profile should return status 200 with invalid name', async () => {
+    server = createServer(profileApi)
+    url = await listen(server)
+    const response = await axios.get(url, {
+      params: {
+        address: invalid
+      }
+    })
+
+    assert(response.status === 200)
   })
 })
 
