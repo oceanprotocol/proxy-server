@@ -10,7 +10,7 @@ import axios from 'axios'
 // import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { assert } from 'chai'
 
-let server
+let server: any
 let url: string
 const name = 'jellymcjellyfish.eth'
 const accountId = '0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0'
