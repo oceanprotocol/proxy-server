@@ -9,7 +9,8 @@
     "clean": "rm -rf ./dist",
     "format": "prettier --ignore-path .gitignore './**/*.{css,yml,js,ts,tsx,json}' --write",
     "test:format": "npm run format && npm run lint",
-    "test": "ts-mocha -p test/tsconfig.json --exit test/**/*.test.ts",
+    "test:integration": "ts-mocha -p test/tsconfig.json --exit test/**/*.test.ts",
+    "test": "test:format && test:integration",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -92,7 +92,7 @@ describe('Testing ENS proxy API endpoints', function () {
     assert(response.data.profile.links[2].key === 'com.github')
   })
 
-  // Tests with incorrect address
+  // Tests with incorrect address or name
 
   it('Requesting address should return status 200 with invalid name', async () => {
     server = createServer(addressApi)
