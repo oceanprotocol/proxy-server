@@ -1,5 +1,6 @@
 import addressApi from '../api/address'
 import nameApi from '../api/name'
+import profileApi from '../api/profile'
 import { createServer } from 'vercel-node-server'
 import listen from 'test-listen'
 // import express from 'express'
@@ -14,7 +15,7 @@ const name = 'jellymcjellyfish.eth'
 const accountId = '0x99840Df5Cb42faBE0Feb8811Aaa4BC99cA6C84e0'
 
 describe('Testing ENS proxy API endpoints', function () {
-  this.timeout(10000)
+  this.timeout(20000)
 
   it('Requesting address should return the expected response', async () => {
     server = createServer(addressApi)
@@ -35,6 +36,24 @@ describe('Testing ENS proxy API endpoints', function () {
       }
     })
     assert(response.data.name === name)
+  })
+  it('Requesting user profile should return the expected response', async () => {
+    server = createServer(profileApi)
+    url = await listen(server)
+    const response = await axios.get(url, {
+      params: {
+        address: accountId
+      }
+    })
+    console.log('profile', response.data.profile)
+    assert(response.data.profile.name === name)
+    assert(
+      response.data.profile.avatar ===
+        'https://metadata.ens.domains/mainnet/avatar/jellymcjellyfish.eth'
+    )
+    assert(response.data.profile.links[0].value === 'https://oceanprotocol.com')
+    assert(response.data.profile.links[2].value === 'oceanprotocol')
+    assert(response.data.profile.links[3].value === 'oceanprotocol')
   })
 })
 

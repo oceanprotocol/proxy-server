@@ -62,6 +62,7 @@ export default async function EnsProfileApi(
 ) {
   try {
     const accountId = String(request.query.address)
+    console.log('accountId', accountId)
     const profile = await getEnsProfile(accountId)
 
     response.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
