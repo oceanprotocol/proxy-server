@@ -1,0 +1,40 @@
+{
+  "name": "ocean-ens-proxy",
+  "description": "Ocean Protocol ENS Proxy Server",
+  "version": "0.0.0",
+  "author": "Ocean Protocol <devops@oceanprotocol.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore --ext .js --ext .ts --ext .tsx . && npm run type-check",
+    "clean": "rm -rf ./dist",
+    "format": "prettier --ignore-path .gitignore './**/*.{css,yml,js,ts,tsx,json}' --write",
+    "test:format": "npm run format && npm run lint",
+    "test:integration": "ts-mocha -p test/tsconfig.json --exit test/**/*.test.ts",
+    "test": "test:format && test:integration",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ethers": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/test-listen": "^1.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.29.0",
+    "@vercel/node": "^2.5.8",
+    "axios": "^0.27.2",
+    "chai": "^4.3.6",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "test-listen": "^1.1.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "4.7.3",
+    "vercel-node-server": "^2.2.1"
+  }
+}
