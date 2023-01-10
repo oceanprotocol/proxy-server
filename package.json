@@ -1,7 +1,8 @@
 {
   "name": "ocean-ens-proxy",
   "description": "Ocean Protocol ENS Proxy Server",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "type": "module",
   "author": "Ocean Protocol <devops@oceanprotocol.com>",
   "license": "Apache-2.0",
   "scripts": {
