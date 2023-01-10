@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "Ocean Protocol <devops@oceanprotocol.com>",
   "license": "Apache-2.0",
+  "type": "module",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ext .js --ext .ts --ext .tsx . && npm run type-check",
     "clean": "rm -rf ./dist",

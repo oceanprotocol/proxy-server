@@ -4,10 +4,9 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "noEmit": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true
+    "isolatedModules": true
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx"]
