@@ -1,7 +1,7 @@
 import addressApi from '../api/address'
 import nameApi from '../api/name'
 import profileApi from '../api/profile'
-import textApi from '../api/text'
+import ensTextApi from '../api/text'
 import { createServer } from 'vercel-node-server'
 import listen from 'test-listen'
 // import express from 'express'
@@ -42,7 +42,7 @@ describe('Testing ENS proxy API endpoints', function () {
     assert(response.data.name === name)
   })
   it('Requesting text records should return the expected response', async () => {
-    server = createServer(textApi)
+    server = createServer(ensTextApi)
     url = await listen(server)
     const response = await axios.get(url, {
       params: {
@@ -115,7 +115,7 @@ describe('Testing ENS proxy API endpoints', function () {
     assert(response.status === 200)
   })
   it('Requesting text records should return status 200 with invalid name', async () => {
-    server = createServer(textApi)
+    server = createServer(ensTextApi)
     url = await listen(server)
     const response = await axios.get(url, {
       params: {
