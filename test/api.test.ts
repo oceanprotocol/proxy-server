@@ -1,7 +1,7 @@
 import addressApi from '../api/address'
 import nameApi from '../api/name'
 import profileApi from '../api/profile'
-import { ensTextApi } from '../api/text'
+import ensTextApi from '../api/text'
 import { createServer } from 'vercel-node-server'
 import listen from 'test-listen'
 // import express from 'express'
