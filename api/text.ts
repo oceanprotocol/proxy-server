@@ -28,7 +28,7 @@ export async function getEnsTextRecords(
   return records
 }
 
-export async function ensTextApi(
+export default async function ensTextApi(
   request: VercelRequest,
   response: VercelResponse
 ) {
