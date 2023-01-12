@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { getProvider } from './utils'
+import { getProvider } from './_utils'
 
 export default async function getEnsAddress(
   request: VercelRequest,
